@@ -1,0 +1,61 @@
+<div class="container border rounded">
+  <form class="d-flex mt-3" role="search">
+    <input
+      class="form-control me-2"
+      type="search"
+      placeholder="Search by name"
+      aria-label="Search"
+      name="searchTerm"
+      [(ngModel)]="searchTerm"
+      (ngModelChange)="searchUsers()"
+    />
+    <button
+      class="btn btn-outline-success"
+      type="submit"
+      (click)="searchUsers()"
+    >
+      Search
+    </button>
+  </form>
+  <form>
+    <table class="table">
+      <thead>
+        <tr>
+          <div class="row">
+            <div class="col col-md-8"><th scope="col">Todo</th></div>
+            <div class="col d-none d-md-block col-md-3">
+              <th scope="col">Name</th>
+            </div>
+          </div>
+        </tr>
+      </thead>
+      <ng-container *ngFor="let user of todosAndUsersName">
+        <tbody *ngFor="let todo of user.todos">
+          <tr>
+            <div class="row">
+              <div class="col col-12 col-md-8">
+                <td class="d-flex">
+                  <div>
+                    <input
+                      [(ngModel)]="todo.completed"
+                      type="checkbox"
+                      id="completed-{{ todo.id }}"
+                      name="completed-{{ todo.id }}"
+                      class="me-2"
+                    />
+                  </div>
+                  <div>
+                    <p>{{ todo.todo }}</p>
+                  </div>
+                </td>
+              </div>
+              <div class="col col-12 col-md-3">
+                <td>{{ user.firstName }} {{ user.lastName }}</td>
+              </div>
+            </div>
+          </tr>
+        </tbody>
+      </ng-container>
+    </table>
+  </form>
+</div>

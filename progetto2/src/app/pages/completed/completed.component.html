@@ -1,0 +1,7 @@
+<div class="container border rounded">
+  <div *ngFor="let user of completedTodoArr">
+    <ul *ngFor="let completedTodo of user.todos">
+      <li>{{ completedTodo.todo }}</li>
+    </ul>
+  </div>
+</div>

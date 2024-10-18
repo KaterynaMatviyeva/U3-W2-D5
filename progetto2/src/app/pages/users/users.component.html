@@ -1,0 +1,62 @@
+<div class="container border rounded p-5">
+  <form class="d-flex" role="search">
+    <input
+      class="form-control me-2"
+      type="search"
+      placeholder="Search by name"
+      aria-label="Search"
+      name="searchTerm"
+      [(ngModel)]="searchTerm"
+      (ngModelChange)="searchUsers()"
+    />
+    <button
+      class="btn btn-outline-success"
+      type="submit"
+      (click)="searchUsers()"
+    >
+      Search
+    </button>
+  </form>
+  <div class="row">
+    <div class="col col-12 g-2" *ngFor="let user of usersWithTodos">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">{{ user.firstName }} {{ user.lastName }}</h5>
+          <div class="d-flex justify-content-between">
+            <p class="card-text">{{ user.title }}</p>
+            <p>Done</p>
+          </div>
+        </div>
+        <ul class="list-group list-group-flush">
+          <li
+            class="list-group-item d-flex align-items-center justify-content-between"
+            *ngFor="let todo of user.todos"
+          >
+            <div class="d-flex align-items-center">
+              <input
+                [(ngModel)]="todo.completed"
+                type="checkbox"
+                id="completed-{{ todo.id }}"
+                name="completed-{{ todo.id }}"
+                class="me-2"
+              />
+
+              <p>{{ todo.todo }}</p>
+            </div>
+            <div>
+              <i [ngClass]="todo.completed ? 'bi bi-check2' : 'bi bi-x'"></i>
+            </div>
+          </li>
+        </ul>
+        <div class="card-body">
+          <img
+            src="{{ user.image }}"
+            class="border rounded-circle me-4"
+            alt="image of user"
+          />
+          <a>{{ user.email }}</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
